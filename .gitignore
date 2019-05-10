@@ -5,6 +5,12 @@
 # Session Data files
 .RData
 
+# notes, data, and results
+notes
+GBAvsPBSasyndiffusion*
+ResultsForMike*
+data
+
 # Example code in package build process
 *-Ex.R
 
