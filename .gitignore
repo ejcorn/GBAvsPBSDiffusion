@@ -7,9 +7,14 @@
 
 # notes, data, and results
 notes
+paper
 GBAvsPBSasyndiffusion*
 ResultsForMike*
 data
+
+# system files
+*.m~
+.DS_Store
 
 # Example code in package build process
 *-Ex.R

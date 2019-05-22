@@ -7,6 +7,7 @@ basedir <- params$basedir
 setwd(basedir)
 savedir <- paste(params$opdir,'processed/',sep='')
 dir.create(savedir,recursive=T)
+source('code/misc/miscfxns.R')
 
 data <- read.csv('data/PathData.csv',header = TRUE, check.names = FALSE)
 connectivity.ipsi <- read.csv('data/Connectome_Ipsi.csv',row.names = 1,header = TRUE,check.names = FALSE)
@@ -73,11 +74,14 @@ if(identical(colnames(path.data)[-1],colnames(W))){
 
 # retain indices to reorder like original data variable for plotting on mouse brains
 region.names <- colnames(W)
-orig.order <- order(match(region.names,names(data)[-1]))
+orig.names <- names(data)[-1]
+orig.order <- order(match(region.names,orig.names))
+
+unit.test(identical(region.names[orig.order],orig.names),'orig.order correct','orig.order INCORRECT')
 
 # save data
 writeMat(paste(savedir,'W.mat',sep=''),W=as.matrix(W))
-save(path.data, region.names, orig.order,n.regions, file = paste(savedir,'pathdata.RData',sep=''))
+save(path.data, region.names, orig.order,orig.names, n.regions, file = paste(savedir,'pathdata.RData',sep=''))
 
 ###############################
 ### Process Snca Expression ###
@@ -90,9 +94,17 @@ syn.names[!syn.names %in% region.names] # names in Snca but not in regions? Yes,
 print('regions missing from Snca Expression?')
 print(region.names[!region.names %in% syn.names]) # names in regions but not in Snca? No
 Synuclein <- Synuclein[,which(syn.names %in% region.names)] # delete regions not in path data
+unit.test(identical(orig.names,colnames(Synuclein)),'names check out','SOMETHING IS WRONG')
 sum(is.na(Synuclein))
+orig.names.syn <- orig.names[!is.na(Synuclein)] # get names in original order, minus those missing Snca data
+unit.test(identical(orig.names,colnames(Synuclein)),'names check out','SOMETHING IS WRONG')
 Synuclein <- Synuclein[,order(match(colnames(Synuclein),region.names))]
 Synuclein <- t(Synuclein)
 
+# retain indices to reorder like original data variable for plotting on mouse brains, only using regions with available Snca expression data
+region.names.syn <- region.names[!is.na(Synuclein)]
+orig.order.syn <- order(match(region.names.syn,orig.names.syn))
+# check if we correctly reorder connectome ordered names, minus regions with no syn data, match up with original order from input data, minus regions with no syn data
+unit.test(identical(region.names.syn[orig.order.syn],orig.names.syn),'orig.order.syn correct','orig.order.syn INCORRECT')
 
-save(Synuclein,file = paste(savedir,'Snca.RData',sep=''))
+save(Synuclein,orig.names.syn,orig.order.syn,file = paste(savedir,'Snca.RData',sep=''))

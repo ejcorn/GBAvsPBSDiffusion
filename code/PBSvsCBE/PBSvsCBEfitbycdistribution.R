@@ -1,3 +1,6 @@
+# this script will compute model fits for each mouse at multiple time constant values
+# then plot the variance of the fits at each value of c
+
 #################
 ### Load data ###
 #################
@@ -7,9 +10,9 @@ basedir <- params$basedir
 setwd(basedir)
 savedir <- paste(params$opdir,'PBSvsCBE/',sep='')
 dir.create(savedir,recursive=T)
-#hdir.create(paste(savedir,'roilevel',sep=''),recursive = T)
 
 source('code/misc/fitfxns.R')
+source('code/misc/miscfxns.R')
 load(paste(params$opdir,'processed/pathdata.RData',sep=''))  # load path data and ROI names
 W <- readMat(paste(params$opdir,'processed/W.mat',sep=''))$W
 L.out <- get.Lout(W,rep(1,n.regions)) # compute out-degreee Laplacian for connectivity only (not weighted by Snca)
@@ -41,4 +44,10 @@ for(MOUSE in 1:n.mice){
 	r.Grp[MOUSE] <- max(fit.by.c)
 }
 
-save(c.train.Grp,r.Grp,file = paste(savedir,grp,'TimeconstantsTF',tf,'.RData',sep=''))
+X <- do.call('rbind',fit.list) # compile fits into Mouse-by-c matrix
+X.sd <- colSD(X)
+X.mean <- colMeans(X)
+df <- data.frame(m=X.mean,s=X.sd,x=c.rng)
+df$grp <- rep(grp,nrow(df))
+
+save(df,file=paste(savedir,grp,'FitsByCByMouse.RData',sep=''))

@@ -13,8 +13,6 @@ source('code/misc/fitfxns.R')
 #################
 
 load(paste(params$opdir,'processed/pathdata.RData',sep=''))  # load path data and ROI names
-load(paste(params$opdir,'processed/Snca.RData',sep='')) # load Snca expression
-Synuclein <- norm.synuclein(Synuclein,1)
 
 # get mean pathology for only GBA time point, 1 month
 Mice <- path.data[path.data$Condition == grp,-1]
@@ -41,21 +39,3 @@ for(S in 1:n.regions){
 
 rownames(seed.fits) <- region.names
 save(seed.fits, file = paste(savedir,grp,'AlternateSeedFits.RData',sep=''))
-
-# compute p-value as probability that other seeds predict observed path better than iCPu seed
-null.cors <- seed.fits[region.names != 'iCP']
-iCP.cor <- seed.fits[region.names == 'iCP']
-seed.region.pval <- mean(iCP.cor < null.cors)
-print(paste('Better fit than iCP:',region.names[which(seed.fits[region.names == 'iCP'] < seed.fits[region.names != 'iCP'])]))
-month <- 'Month 1'
-months <- rep(month,length(null.cors))
-p.null.seeds <- ggplot() + 
-  geom_jitter(aes(x=months,y = null.cors),color ='#5F4B8B',alpha = 0.5,stroke = 0,size = 1, position = position_dodge(width=1)) +
-  geom_point(aes(x=month,y=as.numeric(iCP.cor)),shape = 18,color = 'black',size=2) + 
-  geom_text(aes(x=month,y=0.8,label = paste('p =',signif(seed.region.pval,2))),size=2.5) +
-  xlab('') + ylab('Fit') + ggtitle('Actual vs. Random Seed') +
-  theme(text = element_text(size=8),plot.title = element_text(hjust=0.5,size=8)) +
-  theme(axis.text.x = element_text(size=8)) + theme(axis.text.y = element_text(size=8))
-p.null.seeds
-
-ggsave(p.null.seeds,filename=paste(savedir,grp,'iCPSeedSpecificity.pdf',sep=''),width=2,height=3,units='in')

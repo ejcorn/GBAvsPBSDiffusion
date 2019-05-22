@@ -5,7 +5,7 @@ params <- list(basedir=basedir,
                matlab.path='/Applications/MATLAB/R2018b/bin/matlab',
                grps = c('DPBS','CBE'),
                c.min = 0.01, # empirically conservative minimum for time constant
-               c.max = 100, # empirically conservative maximum for time constant
+               c.max = 60, # empirically conservative maximum for time constant
                c.n = 100) # number of time constants to try
 params$opdir <- paste('GBAvsPBSasyndiffusionCMax',params$c.max,'/',sep='')
 dir.create(params$opdir,recursive = T)
@@ -30,6 +30,7 @@ source('code/process/getLout.R')
 for(grp in params$grps){
   source('code/diffmodel/analyzespread.R')
   source('code/diffmodel/seedspec.R')
+  source('code/diffmodel/plotseedspec.R')
   source('code/diffmodel/examineseedspec.R')
 }
 
@@ -37,5 +38,11 @@ for(grp in params$grps){
 ### Compare distributions of time constants ###
 ###############################################
 
+source('code/PBSvsCBE/predict_crng.R')
 for(grp in params$grp){source('code/PBSvsCBE/PBSvsCBEtimeconstbymouse.R')}
 source('code/PBSvsCBE/plotPBSvsCBEtimeconstbymouse.R')
+for(grp in params$grp){source('code/PBSvsCBE/PBSvsCBEfitbycdistribution.R')}
+source('code/PBSvsCBE/plotPBSvsCBEfitbycdistribution.R')
+
+for(grp in params$grp){source('code/PBSvsCBE/PBSvsCBEtimeconst_boot.R')}
+source('code/PBSvsCBE/plotPBSvsCBEtimeconst.R')

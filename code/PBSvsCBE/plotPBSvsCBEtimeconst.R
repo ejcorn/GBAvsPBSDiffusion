@@ -3,7 +3,7 @@ basedir <- params$basedir
 setwd(basedir)
 savedir <- paste(params$opdir,'PBSvsCBE/',sep='')
 
-tf = 0.5
+tf = 0.8
 
 load(paste(savedir,'DPBSSyntimeconstantsTF',tf,'.RData',sep=''))
 c.train.PBS <- c.train.Grp

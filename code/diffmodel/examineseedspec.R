@@ -56,7 +56,7 @@ print(lb)
 p.spec <- ggplot(data=df,aes(x=conn,y=nullcor)) + geom_point(color ='#5F4B8B',alpha = 0.5,stroke = 0,size = 1) + 
   geom_smooth(method='gam',formula=y~s(x,k=3),color ='#5F4B8B') +
   annotate(geom='text',label=lb,x=max(df$conn),y=min(df$nullcor),hjust=1,vjust=0,parse=T,size=2) +
-  xlab('In-Projection Similarity \n to iCPu (r)') + ylab('Fit to iCPu Injection') + ggtitle(grp) +
+  xlab('In-Projection Similarity \n to iCPu (r)') + ylab('Fit to iCPu Injection (r)') + ggtitle(grp) +
   theme_classic() + theme(text=element_text(size=6),plot.title = element_text(size=8,hjust=0.5)) #+
   #theme(axis.title.x = element_text(size=8))
 
@@ -74,7 +74,7 @@ print(lb)
 p.spec <- ggplot(data=df,aes(x=conn,y=nullcor)) + geom_point(color ='#5F4B8B',alpha = 0.5,stroke = 0,size = 1) + 
   geom_smooth(method='gam',formula=y~s(x,k=3),color ='#5F4B8B') +
   annotate(geom='text',label=lb,x=max(df$conn),y=min(df$nullcor),hjust=1,vjust=0,parse=T,size=2) +
-  xlab('Out-Projection Similarity \n to iCPu (r)') + ylab('Fit to iCPu Injection') + ggtitle(grp) +
+  xlab('Out-Projection Similarity \n to iCPu (r)') + ylab('Fit to iCPu Injection (r)') + ggtitle(grp) +
   theme_classic() + theme(text=element_text(size=6),plot.title = element_text(size=8,hjust=0.5)) #+
   #theme(axis.title.x = element_text(size=8))
 
