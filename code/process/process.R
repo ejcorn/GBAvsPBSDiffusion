@@ -58,12 +58,13 @@ path.data <- cbind(data[,1],path.data.ipsi[,order(match(path.names.ipsi,conn.nam
 colnames(path.data)[1] <- 'Condition'
 
 # tile matrix such that sources are rows, columns are targets (see Oh et al. 2014 Fig 4)
-rownames(connectivity.ipsi) <- paste('i',rownames(connectivity.ipsi),sep='') # add i to ipsilateral connections
-colnames(connectivity.ipsi) <- paste('i',colnames(connectivity.ipsi),sep='') # add i to ipsilateral connections
-rownames(connectivity.contra) <- paste('i',rownames(connectivity.contra),sep='') # add i to ipsilateral connections
-colnames(connectivity.contra) <- paste('c',colnames(connectivity.contra),sep='') # add c to contralateral connections
 
 W <- rbind(cbind(connectivity.ipsi,connectivity.contra),cbind(connectivity.contra,connectivity.ipsi))
+rownames(W) <- c(paste('i',rownames(connectivity.ipsi),sep=''), # add i to ipsilateral connections
+                 paste('c',rownames(connectivity.contra),sep='')) # add c to contralateral connections
+colnames(W) <- c(paste('i',rownames(connectivity.ipsi),sep=''), # add i to ipsilateral connections
+                 paste('c',rownames(connectivity.contra),sep='')) # add c to contralateral connections
+
 n.regions <- nrow(W)
 
 # confirm it worked
