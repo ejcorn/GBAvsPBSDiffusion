@@ -7,6 +7,8 @@ params <- list(basedir=basedir,
                c.min = 0.01, # empirically conservative minimum for time constant
                c.max = 60, # empirically conservative maximum for time constant
                c.n = 100) # number of time constants to try
+source('code/misc/miscfxns.R')
+params$source.save <- source.save
 params$opdir <- paste('GBAvsPBSasyndiffusionCMax',params$c.max,'/',sep='')
 dir.create(params$opdir,recursive = T)
 
@@ -28,10 +30,12 @@ source('code/process/getLout.R')
 ################################
 
 for(grp in params$grps){
-  source('code/diffmodel/analyzespread.R')
+  # save all stats output
+  params$source.save('code/diffmodel/analyzespread.R',paste(params$opdir,'diffmodel/',grp,'spread.log',sep=''))
   source('code/diffmodel/seedspec.R')
   source('code/diffmodel/plotseedspec.R')
-  source('code/diffmodel/examineseedspec.R')
+  # save all stats output
+  params$source.save('code/diffmodel/examineseedspec.R',paste(params$opdir,'diffmodel/seedspec/',grp,'connsimaltseed.log',sep=''))
 }
 
 ###############################################

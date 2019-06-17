@@ -26,3 +26,14 @@ fda <- function(x1,x2,nperms = 1000){
 
 
 }
+
+source.save <- function(script,output){
+	# wrapper for source function that saves output and input of script
+	con <- file(output)
+	#sink(con, append=TRUE)
+	sink(con, type="output")
+	source(script)
+	sink() 
+	sink(type="output")
+
+}
