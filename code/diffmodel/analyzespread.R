@@ -38,7 +38,7 @@ mask <- df$path != -Inf
 print(paste(sum(mask),'regions')) # number of regions left after exclusion
 df <- df[mask,] 
 # use linear model to predict path from connectivity and synuclein
-m <- lm(path~Xt+Syn,data=df)
+m <- lm.beta(lm(path~Xt+Syn,data=df))
 df <- data.frame(pred=m$fitted.values,path=df$path[!is.na(df$Syn)]) # predicted values vs. actual values for regions with Syn expression
 c.test <- cor.test(df$pred,df$path)
 print(grp)

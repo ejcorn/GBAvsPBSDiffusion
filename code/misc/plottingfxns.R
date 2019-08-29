@@ -7,3 +7,13 @@ plot.Xt <- function(Xt,t){
 	p
 
 }
+
+library(reshape2)
+imagesc <- function(m){
+	# plot matrix m as a heatmap for quick visualization
+	df <- melt(as.matrix(m))
+	p <- ggplot(df) + geom_tile(aes(x=Var1,y=Var2, fill=value)) + 
+		scale_y_discrete(limits=rev(unique(df$Var1))) + # flip y-axis so region 1 is at the top of the plot, 
+		theme(axis.text.x = element_text(angle=90))
+	return(p)
+}

@@ -1,22 +1,22 @@
 rm(list=ls())
 basedir <- '~/Dropbox/Neurodegeneration/GBAvsPBSDiffusion/'
 setwd(basedir)
-params <- list(basedir=basedir,
-               matlab.path='/Applications/MATLAB/R2018b/bin/matlab',
+params <- list(basedir=basedir,               
                grps = c('DPBS','CBE'),
                c.min = 0.01, # empirically conservative minimum for time constant
-               c.max = 60, # empirically conservative maximum for time constant
+               c.max = 10, # empirically conservative maximum for time constant
                c.n = 100) # number of time constants to try
 source('code/misc/miscfxns.R')
 params$source.save <- source.save
-params$opdir <- paste('GBAvsPBSasyndiffusionCMax',params$c.max,'/',sep='')
+params$opdir <- paste('GBAvsPBSasyndiffusion8219CMax',params$c.max,'/',sep='')
 dir.create(params$opdir,recursive = T)
 
-#####################
-### Load packages ###
-#####################
+#################################################
+### Load packages & create output directories ###
+#################################################
 
 source('code/misc/packages.R')
+source('code/misc/directories.R')
 
 ####################
 ### Process data ###
@@ -37,6 +37,8 @@ for(grp in params$grps){
   # save all stats output
   params$source.save('code/diffmodel/examineseedspec.R',paste(params$opdir,'diffmodel/seedspec/',grp,'connsimaltseed.log',sep=''))
 }
+
+
 
 ###############################################
 ### Compare distributions of time constants ###

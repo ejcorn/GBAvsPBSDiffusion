@@ -5,24 +5,26 @@ echo 'type output directory name:'
 read ROOT
 
 cd ~/Dropbox/Neurodegeneration/GBAvsPBSDiffusion
-mkdir -p ResultsForMike
+SAVEDIR=ResultsForMike8219
+mkdir -p $SAVEDIR
 
 # copy predicted path and vulnerability csv files
-cp $ROOT/diffmodel/*.csv ResultsForMike/
+cp $ROOT/diffmodel/*.csv $SAVEDIR/
 # delete the ones that are for me, not in the order Mike wants them
-rm ResultsForMike/*Eli.csv
+rm $SAVEDIR/*Eli.csv
 
-cp $ROOT/diffmodel/CBEpredictedpathcontinuous.pdf ResultsForMike/Fig1a.pdf
-cp $ROOT/diffmodel/CBEspread.log ResultsForMike/Fig1a.log
-cp $ROOT/diffmodel/DPBSpredictedpathcontinuous.pdf ResultsForMike/Fig1b.pdf
-cp $ROOT/diffmodel/DPBSspread.log ResultsForMike/Fig1b.log
+cp $ROOT/diffmodel/DPBSpredictedpathcontinuous.pdf $SAVEDIR/Fig1a.pdf
+cp $ROOT/diffmodel/DPBSspread.log $SAVEDIR/Fig1a.log
+cp $ROOT/diffmodel/CBEpredictedpathcontinuous.pdf $SAVEDIR/Fig1b.pdf
+cp $ROOT/diffmodel/CBEspread.log $SAVEDIR/Fig1b.log
 
-cp $ROOT/diffmodel/seedspec/CBEiCPSeedSpecificity.pdf ResultsForMike/Fig2a.pdf
-cp $ROOT/diffmodel/seedspec/DPBSiCPSeedSpecificity.pdf ResultsForMike/Fig2b.pdf
+cp $ROOT/diffmodel/seedspec/DPBSiCPSeedSpecificity.pdf $SAVEDIR/Fig2a.pdf
+cp $ROOT/diffmodel/seedspec/CBEiCPSeedSpecificity.pdf $SAVEDIR/Fig2b.pdf
+cp $ROOT/diffmodel/seedspec/*.csv $SAVEDIR/
 
-cp $ROOT/diffmodel/seedspec/CBEAlternateSeedFitByInProjectionSimilarity.pdf ResultsForMike/Fig2c.pdf
-cp $ROOT/diffmodel/seedspec/CBEconnsimaltseed.log ResultsForMike/Fig2c.log
-cp $ROOT/diffmodel/seedspec/DPBSAlternateSeedFitByInProjectionSimilarity.pdf ResultsForMike/Fig2d.pdf
-cp $ROOT/diffmodel/seedspec/DPBSconnsimaltseed.log ResultsForMike/Fig2d.log
+cp $ROOT/diffmodel/seedspec/DPBSAlternateSeedFitByInProjectionSimilarity.pdf $SAVEDIR/Fig2c.pdf
+cp $ROOT/diffmodel/seedspec/DPBSconnsimaltseed.log $SAVEDIR/Fig2c.log
+cp $ROOT/diffmodel/seedspec/CBEAlternateSeedFitByInProjectionSimilarity.pdf $SAVEDIR/Fig2d.pdf
+cp $ROOT/diffmodel/seedspec/CBEconnsimaltseed.log $SAVEDIR/Fig2d.log
 
-#cp $ROOT/PBSvsCBE/BaseTCjitterTF0.5.pdf ResultsForMike/Fig3a.pdf
+#cp $ROOT/PBSvsCBE/BaseTCjitterTF0.5.pdf $SAVEDIR/Fig3a.pdf

@@ -26,6 +26,12 @@ W <- readMat(paste(params$opdir,'processed/W.mat',sep=''))$W
 ######################################################
 
 load(file = paste(savedir,grp,'AlternateSeedFits.RData',sep=''))
+
+# save vector of fits using alternate seed regions for Mike to plot
+df.sf <- data.frame(r=seed.fits[orig.order,1])
+unit.test(identical(rownames(df.sf),orig.names),'names reordered correctly','names reordered INCORRECTLY')
+write.csv(df.sf,paste(savedir,grp,'AlternateSeedFits.csv',sep=''))
+
 W <- readMat(paste(params$opdir,'processed/W.mat',sep=''))$W
 W <- W * !diag(n.regions) # get rid of diagonal
 

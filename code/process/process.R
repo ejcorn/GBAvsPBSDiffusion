@@ -98,9 +98,9 @@ Synuclein <- Synuclein[,which(syn.names %in% region.names)] # delete regions not
 unit.test(identical(orig.names,colnames(Synuclein)),'names check out','SOMETHING IS WRONG')
 sum(is.na(Synuclein))
 orig.names.syn <- orig.names[!is.na(Synuclein)] # get names in original order, minus those missing Snca data
-unit.test(identical(orig.names,colnames(Synuclein)),'names check out','SOMETHING IS WRONG')
 Synuclein <- Synuclein[,order(match(colnames(Synuclein),region.names))]
 Synuclein <- t(Synuclein)
+unit.test(identical(rownames(Synuclein),region.names),'synuclein names check out','SOMETHING IS WRONG')
 
 # retain indices to reorder like original data variable for plotting on mouse brains, only using regions with available Snca expression data
 region.names.syn <- region.names[!is.na(Synuclein)]
