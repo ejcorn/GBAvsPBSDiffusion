@@ -3,7 +3,7 @@
 Code to reproduce all analysis in Henderson et al. 2019 ("Glucocerebrosidase activity modulates neuronal susceptibility to pathological αsynuclein insult"). In these analyses, we use a linear network diffusion model to explain the spread of α-synuclein pathology through the brain over time after injection of misfolded α-synuclein into the caudoputamen in mice that were coinjected with either vehicle (DPBS group) or glucocerebrocidase inhibitor (CBE group).
 
 ## Requirements:
-  - R 3.3.3 or later. Requisite packages are listed in code/packages.R
+  - R 3.3.3 or later. Requisite packages are listed in code/misc/packages.R
 
 ## Directory structure
 
