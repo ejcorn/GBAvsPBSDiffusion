@@ -13,7 +13,10 @@ GBAvsPBSasyndiffusion*
 ResultsForMike*
 *PBSvsCBE*
 data/
+
+# code that was ultimately unused in publication
 code/misc/troubleshoot*.R
+code/*prior*.R
 
 #data
 
