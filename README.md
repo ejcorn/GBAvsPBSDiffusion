@@ -8,12 +8,13 @@ Code to reproduce all analysis in Henderson et al. 2019 ("Glucocerebrosidase act
 ## Directory structure
 
 Master branch contains 2 major folders:
-  - code/diffmodel contains code that uses linear diffusion models to predict spread of protein through structural connectome, 
   - code/process contains code that deals with loading and processing data
   - code/misc contains various helper functions for analysis and plotting that are called in other scripts
+  - code/diffmodel contains code that uses linear diffusion models to predict spread of protein through structural connectome.
+  - code/PBSvsCBE contains code that compares time constant values between PBS and CBE-injected mice
   - data/ contains csv and xlsx files with 1) experimentally obtained pathology data and 2) parcellated Snca expression data and connectome data from Allen Brain Institute. 
   
-Using gene expression and linear dynamics of spread along the connectome, we attempt to predict the spatial distribution of experimentally observed pathology at 1, 3, and 6 months post injection.
+Using gene expression and linear dynamics of spread along the connectome, we attempt to predict the spatial distribution of experimentally observed pathology at 1 month post injection, and test whether injection of a glucocerebrocidase inhibitor impacts spreading dynamics.
 
 ## Input specification
 
@@ -21,9 +22,9 @@ The file ‘pipeline.R’ is located in the main directory. This file will coord
   - basedir:  path to the main directory containing the 'code' and 'data' folders 
   - opdir: name of output directory that contains all results, which will be housed in basedir. the line params$opdir <- paste(...) can be replaced with any string that ends with a '/', and that string will serve as the name of the output directory.
   - grps: character vector containing the name of groups in data file to test. For our data set, these were 'DPBS' and 'CBE'
-  - c.min: minimum value for time constant sweep
-  - c.max: maximum value for time constant sweep
-  - c.n: number of time constants to test, linearly spaced between c.min and c.max
+  - c.min: minimum value for time constant sweep (0 is fine)
+  - c.max: maximum value for time constant sweep (10 is fine)
+  - c.n: number of time constants to test, linearly spaced between c.min and c.max (100 is fine)
 
 The script moveresults.sh compiles the pipeline output for a specific output folder name and creates a new folder with the figures that ultimately were included in the manuscript, along with relevant stats output as a .log file.
 

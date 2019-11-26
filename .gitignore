@@ -12,6 +12,8 @@ paper
 GBAvsPBSasyndiffusion*
 ResultsForMike*
 *PBSvsCBE*
+data/
+code/misc/troubleshoot*.R
 
 #data
 

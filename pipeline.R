@@ -8,7 +8,7 @@ params <- list(basedir=basedir,
                c.n = 100) # number of time constants to try
 source('code/misc/miscfxns.R')
 params$source.save <- source.save
-params$opdir <- paste('GBAvsPBSasyndiffusion8219CMax',params$c.max,'/',sep='')
+params$opdir <- paste('GBAvsPBSasyndiffusion112519CMax',params$c.max,'/',sep='')
 dir.create(params$opdir,recursive = T)
 
 #################################################
