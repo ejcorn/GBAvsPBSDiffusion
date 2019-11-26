@@ -12,13 +12,12 @@ paper
 GBAvsPBSasyndiffusion*
 ResultsForMike*
 *PBSvsCBE*
-data/
 
 # code that was ultimately unused in publication
 code/misc/troubleshoot*.R
 code/*prior*.R
-
-#data
+code/*sweepsynnorm*.R
+code/*varexplained*.R
 
 # system files
 *.m~
