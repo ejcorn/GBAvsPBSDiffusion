@@ -30,4 +30,4 @@ The script moveresults.sh compiles the pipeline output for a specific output fol
 
 ## Questions, suggestions, comments?
 
-Please contact Eli Cornblath (Eli.Cornblath@pennmedicine.upenn.edu) with any questions regarding network analysis and code, and contact Mike Henderson (hendm@pennmedicine.upenn.edu) with any questions regarding experiments and data.
+Please contact Eli Cornblath (Eli ~`DOT`~ Cornblath ~`AT`~ pennmedicine.upenn.edu) with any questions regarding network analysis and code, and contact Mike Henderson (hendm ~`AT`~ pennmedicine.upenn.edu) with any questions regarding experiments and data.
